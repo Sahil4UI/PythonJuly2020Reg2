@@ -1,0 +1,36 @@
+Print the following pattern ->
+*
+**
+***
+****
+*****
+
+Print the following pattern ->
+*****
+****
+***
+**
+*
+
+Print the following pattern->
+      *
+    ***
+  *****
+*******
+
+
+Question-> you have a string of numbers,
+								string1 = “12345”
+
+									take choice as an input , print found  if choice is in the string otherwise print not found
+
+Question-> find the reverse of a number -  123 ->321
+
+
+Question->input two string(string1,string2) and check wether it is anagram or not
+
+									string1 - LISTEN 
+									string2 - SILENT
+
+
+								
