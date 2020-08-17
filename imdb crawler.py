@@ -20,3 +20,13 @@ name = div.find("h1")
 name = name.text
 print(name)
 
+storyDiv = moviePage.find("div",id="titleStoryLine")
+divs = storyDiv.findAll("div",class_="see-more inline canwrap")
+genere = divs[1].findAll("a")
+print("Genere : ",end= "")
+x = ""
+for i in genere:
+    x+= i.text+" | "
+
+print(x[:-2])
+
