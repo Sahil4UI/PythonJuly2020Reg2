@@ -1,0 +1,9 @@
+def Calculator(a,b,operator):
+    return eval(a+operator+b)
+x = input("Enter Number 1 : ")
+y = input("Enter Number 2 : ")
+
+choice = input("Enter the Operator : ")
+
+print(Calculator(x,y,choice))
+
