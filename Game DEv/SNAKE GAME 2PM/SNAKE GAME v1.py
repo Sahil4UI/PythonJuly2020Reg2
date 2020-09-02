@@ -48,15 +48,20 @@ def score(counter):
      text = font.render(f"Score : {counter}",True,red)
      gameBoard.blit(text,(800,20))
      
-    
+def snake(snakeList,colorList,w,h):
+    for i in range(len(snakeList)):
+        pygame.draw.rect(gameBoard,colorList[i],[snakeList[i][0],snakeList[i][1],w,h])
 def mainGame():
     x=0
     y=0
-    w=50
-    h=50
+    w=40
+    h=40
     movex = 0
     movey = 0
     counter=0
+    snakeList=[]
+    colorList=[]
+    snakeLength = 1
 
     frogX = random.randint(0,width-frogWidth)
     frogY = random.randint(0,height-frogHeight)
@@ -85,22 +90,39 @@ def mainGame():
 
         gameBoard.fill(white)
         gameBoard.blit(frogImage,(frogX,frogY))
-        myRect = pygame.draw.rect(gameBoard,(random.randint(0,255),random.randint(0,255),random.randint(0,255)),(x,y,w,h))
+        myRect = pygame.draw.rect(gameBoard,red,(x,y,w,h))
         frogRect = pygame.Rect(frogX,frogY,frogWidth,frogHeight)
         x+=movex
         y+=movey
 
+
+
+        head =[]
+        head.append(x)
+        head.append(y)
+
+        snakeList.append(head)
+
+        color = random.randint(0,255),random.randint(0,255),random.randint(0,255)
+        colorList.append(color)
+        if len(snakeList)>snakeLength:
+            del snakeList[0]
+            del colorList[0]
+
+        snake(snakeList,colorList,w,h)
+        
         score(counter)
 
         if frogRect.colliderect(myRect):
             frogX = random.randint(0,width-frogWidth)
             frogY = random.randint(0,height-frogHeight)
             sound.play()
+            snakeLength+=5
             counter+=1
             
-            
-
-        
+        for each in snakeList[:-1]:
+            if each == snakeList[-1]:
+                print("Game Over")
 
         if x>width-w:
             movex=-5
