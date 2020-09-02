@@ -41,7 +41,13 @@ def homeScreen():
 
         gameBoard.blit(gameBg,(0,0))
         gameBoard.blit(text,(50,450))
-        pygame.display.flip()            
+        pygame.display.flip()
+        
+def score(counter):
+     font = pygame.font.SysFont(None,30)
+     text = font.render(f"Score : {counter}",True,red)
+     gameBoard.blit(text,(800,20))
+     
     
 def mainGame():
     x=0
@@ -50,6 +56,7 @@ def mainGame():
     h=50
     movex = 0
     movey = 0
+    counter=0
 
     frogX = random.randint(0,width-frogWidth)
     frogY = random.randint(0,height-frogHeight)
@@ -83,10 +90,14 @@ def mainGame():
         x+=movex
         y+=movey
 
+        score(counter)
+
         if frogRect.colliderect(myRect):
             frogX = random.randint(0,width-frogWidth)
             frogY = random.randint(0,height-frogHeight)
             sound.play()
+            counter+=1
+            
             
 
         
