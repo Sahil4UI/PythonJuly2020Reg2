@@ -1,33 +1,50 @@
-import pygame
+import pygame , random
 pygame.init()
 
 height = 500
-width = 1000
+width=1000
 
-screen = pygame.display.set_mode((width,height))
-red = 255,0,0
+gameBoard = pygame.display.set_mode((width,height))
 white = 255,255,255
+red = 255,0,0
+
+
 def game():
-    brickWidth = 200
-    brickHeight = 40
-    rows = 5
-    cols = (width//brickWidth)
+    brickWidth=100
+    brickHeight =30
+    nrows = 5
+    ncol = (width//brickWidth)-1
     brickList = []
-    for i in range(rows):
-        for j in range(cols):
-            brickList.append(pygame.Rect((brickWidth+10)*j,(brickHeight+10)*i,brickWidth,brickHeight))
-        
+    colorList = []
+    barWidth = 200
+    barHeight = 20
+    barX = width//2 - (barWidth//2)
+    barY = height - barHeight
+    for i in range(nrows):
+        for j in range(ncol):
+            brick = pygame.Rect((brickWidth+13)*j,(brickHeight+13)*i,brickWidth,brickHeight)
+            brickList.append(brick)
+            mycolor = random.randint(0,255),random.randint(0,255),random.randint(0,255)
+            colorList.append(mycolor)
 
     while True:
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
+            if event.type==pygame.QUIT:
                 pygame.quit()
                 quit()
-                
-        screen.fill(white)
-        for x in range(len(brickList)):
-            pygame.draw.rect(screen,red,brickList[x])
+
+        gameBoard.fill(white)
+       
+        for i in range(len(brickList)):
+            pygame.draw.rect(gameBoard,colorList[i],brickList[i])
+
+        bar=pygame.draw.rect(gameBoard,red,[barX,barY,barWidth,barHeight])
+
         pygame.display.flip()
-            
+
 game()
-    
+            
+            
+            
+            
+        
