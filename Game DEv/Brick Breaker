@@ -24,6 +24,14 @@ def game():
     ballRadius=10
     ballX=barX+barWidth//2
     ballY=barY-ballRadius
+    moveBarX =0
+
+    on_bar = True
+    in_air = False
+    moveballX=0
+    moveBallY=0
+    
+    
     for i in range(nrows):
         for j in range(ncol):
             brick = pygame.Rect((brickWidth+13)*j,(brickHeight+13)*i,brickWidth,brickHeight)
@@ -35,17 +43,56 @@ def game():
             if event.type==pygame.QUIT:
                 pygame.quit()
                 quit()
+            if event.type==pygame.KEYDOWN:
+                if not in_air:
+                    if event.key == pygame.K_SPACE:
+                        moveballX = random.randrange(-6,6)
+                        moveballY = -6
+                        on_bar=False
+                        
+            if event.type ==pygame.KEYDOWN:
+                if event.key==pygame.K_LEFT:
+                    moveBarX = -10
+                elif event.key ==pygame.K_RIGHT:
+                    moveBarX=10
+            elif event.type ==pygame.KEYUP:
+                moveBarX=0
+
+        barX+=moveBarX
+                
         gameBoard.fill(white)
+        
         for i in range(len(brickList)):
             pygame.draw.rect(gameBoard,colorList[i],brickList[i])
         bar=pygame.draw.rect(gameBoard,red,[barX,barY,barWidth,barHeight])
         ball=pygame.draw.circle(gameBoard,blue,[ballX,ballY],ballRadius)
 
+       
+        if ballX>width-20:
+            moveballX = -6
+        elif ballX<0:
+            moveballY=6
+        elif ballY<0:
+            moveballY=6
+            
+        if ballY > height:
+            on_bar=True
+            
+        if on_bar:
+            in_air=False
+            ballX = barX+100
+            ballY = barY-10
+        else:
+            in_air=True
+            ballX += moveballX
+            ballY += moveballY
+
+        if barX>width-200 or barX<0:
+            moveBarX=0
+
+        
         pygame.display.flip()
 
 game()
-            
-            
-            
             
         
