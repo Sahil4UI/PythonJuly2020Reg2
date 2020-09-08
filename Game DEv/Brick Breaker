@@ -67,11 +67,14 @@ def game():
         bar=pygame.draw.rect(gameBoard,red,[barX,barY,barWidth,barHeight])
         ball=pygame.draw.circle(gameBoard,blue,[ballX,ballY],ballRadius)
 
+
+        if bar.colliderect(ball):
+            moveballY=-6
        
         if ballX>width-20:
             moveballX = -6
         elif ballX<0:
-            moveballY=6
+            moveballX=6
         elif ballY<0:
             moveballY=6
             
